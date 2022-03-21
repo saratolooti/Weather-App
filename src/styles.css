@@ -1,0 +1,394 @@
+@import url("https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@300;400;500&display=swap");
+
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --dashoffset-h: 77;
+  --dashoffset-f: 176;
+  --dashoffset-w: 204;
+  --main-font-c: #e0e5ee;
+  --font-c: #bbbbbb;
+  --subject-c: #4f545c;
+  --box-bg-c: #262d3e;
+  --light-box-bg-c: #2b3346;
+  --background-c: #212737;
+}
+
+body {
+  padding-top: 10px;
+  background: var(--background-c);
+  font-weight: 500;
+  font-family: "M PLUS Rounded 1c", sans-serif;
+}
+
+a {
+  color: #f72585;
+  text-decoration: none;
+}
+
+i {
+  color: #f72585;
+}
+
+.container {
+  padding: 0 8vw;
+}
+
+.row {
+  padding: 10px 0;
+}
+
+.pl-12 {
+  padding-left: 12px;
+}
+
+.pr-20 {
+  padding-right: 20px;
+}
+
+.mr-30 {
+  margin-right: 2.13vmax;
+}
+
+.mt-sm-20 {
+  margin-top: 20px;
+}
+
+.searchbar {
+  max-width: 320px;
+  height: 40px;
+  border: none;
+  padding: 0 15px 5px 15px;
+  background: var(--background-c);
+  box-shadow: 0px 0px 2px rgba(196, 196, 196, 0.25);
+  border-radius: 6px;
+}
+
+#searchInput::placeholder {
+  color: #5f5f5f;
+}
+
+#searchInput {
+  width: 100%;
+}
+
+/* toggle switch*/
+
+input[type="checkbox"] {
+  width: 60px;
+  height: 25px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  background: #363f55;
+  border-radius: 20px;
+  -webkit-appearance: none;
+  outline: none;
+}
+
+input[type="checkbox"]::before {
+  position: absolute;
+  content: "";
+  left: 0;
+  z-index: 3;
+  width: 20px;
+  height: 20px;
+  margin: 0 5px;
+  background: #ca79ff;
+  border-radius: 50%;
+  transition: 0.4s;
+}
+
+input:checked[type="checkbox"]::before {
+  left: 31px;
+}
+
+.toggle {
+  position: relative;
+  display: inline;
+}
+
+.unitBtn {
+  position: absolute;
+  color: var(--font-c);
+  font-size: 20px;
+  pointer-events: none;
+}
+
+#Cbtn {
+  top: -3px;
+  left: 36px;
+}
+
+#Fbtn {
+  top: -3px;
+  left: 9px;
+}
+
+/* end toggle switch*/
+.city,
+.country {
+  color: var(--main-font-c);
+}
+
+.city {
+  font-size: 80px;
+  text-transform: capitalize;
+}
+
+.country {
+  font-size: 40px;
+  font-weight: normal;
+}
+
+.box {
+  padding: 18px 1em 20px;
+  border: none;
+  background: var(--box-bg-c);
+  box-shadow: 16px 14px 39px -13px rgb(19, 22, 31),
+    -12px -10px 20px -18px rgb(74, 82, 94);
+  border-radius: 21px;
+}
+
+.subject {
+  color: var(--subject-c);
+  font-size: 22px;
+  margin-bottom: 5px;
+}
+
+.temperature-container {
+  padding: 10px 9px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.current-degree {
+  color: var(--main-font-c);
+  font-size: 65px;
+}
+
+.general-weather {
+  color: var(--font-c);
+  padding: 0 9px;
+  font-size: 25px;
+}
+
+.time-box {
+  color: var(--main-font-c);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.currClock {
+  margin-top: 30px;
+  font-size: 50px;
+}
+
+.currDate {
+  font-size: 22px;
+}
+
+/* next 5 days */
+/*width: 705px;*/
+.row-width {
+  width: 50vmax;
+}
+
+.flex-space {
+  display: flex;
+  justify-content: space-around;
+}
+
+.nextWeather-icon {
+  position: relative;
+  top: 25px;
+}
+
+.nextWeather-icon img {
+  display: block;
+  margin: 0 auto;
+}
+
+.weather-box {
+  height: 80px;
+  border: none;
+  padding: 10px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  background: var(--light-box-bg-c);
+  border-radius: 15px;
+}
+
+.nextDate {
+  font-size: 18px;
+  color: #686b79;
+  margin-right: 5px;
+}
+
+.nextDegree {
+  font-size: 20px;
+  color: var(--font-c);
+}
+
+/*circle chart*/
+
+.circle-wrap {
+  margin: 0 auto;
+  width: 80px;
+  height: 80px;
+  padding: 20px;
+  background: var(--light-box-bg-c);
+  border-radius: 50%;
+  position: relative;
+}
+
+.inner {
+  margin: 0 auto;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  border-radius: 50%;
+  background: var(--light-box-bg-c);
+}
+
+.number {
+  font-size: 20px;
+  color: var(--main-font-c);
+}
+
+circle {
+  fill: none;
+  stroke: #ca79ff;
+  stroke-width: 10px;
+  stroke-dasharray: 220;
+  stroke-dashoffset: 220;
+}
+
+svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+#humidityFill {
+  animation: fill-humidity 1s linear forwards;
+}
+
+@keyframes fill-humidity {
+  100% {
+    stroke-dashoffset: var(--dashoffset-h); /* 220 - 220 * 0.65*/
+  }
+}
+
+#feelsLikeFill {
+  animation: fill-feelsLike 1s linear forwards;
+}
+
+@keyframes fill-feelsLike {
+  100% {
+    stroke-dashoffset: var(--dashoffset-f);
+  }
+}
+
+#windFill {
+  animation: fill-wind 1s linear forwards;
+}
+
+@keyframes fill-wind {
+  100% {
+    stroke-dashoffset: var(--dashoffset-w);
+  }
+}
+
+/*chart name*/
+
+.chartName {
+  color: var(--font-c);
+  text-align: center;
+  font-size: 18px;
+  font-weight: normal;
+  margin-top: 5px;
+}
+
+.unit {
+  font-size: 13px;
+}
+
+/*end chart*/
+
+/* message box */
+.messageBox {
+  background: linear-gradient(
+    -45deg,
+    #cf98f3,
+    #eebae0,
+    #a8f9fc,
+    #ebb1dc,
+    #83fbff
+  );
+  background-size: 200% 200%;
+  animation: gradientLoop 6s ease infinite;
+}
+
+@keyframes gradientLoop {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.message-img {
+  display: block;
+  margin: 0 auto;
+}
+
+.message {
+  margin: 80px 0 10px;
+  color: var(--subject-c);
+  font-size: 20px;
+  text-align: center;
+}
+
+/*end message box*/
+
+.contact-text {
+  color: var(--font-c);
+  font-size: 20px;
+}
+
+.icons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.icon {
+  width: 30px;
+  height: 30px;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--light-box-bg-c);
+  border-radius: 50%;
+  box-shadow: 8px 4px 18px -2px rgb(31, 31, 49);
+}
+
+.footer-text {
+  color: #696969;
+  text-align: center;
+}
