@@ -1,6 +1,6 @@
 /* change Time and Date */
-function changeTime() {
-  let now = new Date();
+function changeTime(timestamp) {
+  let now = new Date(timestamp);
 
   let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
   let months = [
@@ -49,6 +49,8 @@ function currWeather(response) {
   let humidity = response.data.main.humidity;
   let feelsLike = Math.round(response.data.main.feels_like);
   let windSpeed = Math.round(response.data.wind.speed);
+  let iconNum = response.data.weather[0].icon;
+  let date = response.data.dt * 1000;
 
   //getting from Html
   let currTempText = document.querySelector("#current-degree");
@@ -56,6 +58,7 @@ function currWeather(response) {
   let humidityText = document.querySelector("#humidityPercentage");
   let feelsLikeText = document.querySelector("#feelsLikedegree");
   let windText = document.querySelector("#windSpeed");
+  let currentIcon = document.querySelector("#currWeather-icone");
 
   currTempText.innerHTML = `${currtemp}°`;
   descriptionText.innerHTML = description;
@@ -63,6 +66,7 @@ function currWeather(response) {
   feelsLikeText.innerHTML = `${feelsLike}°`;
   windText.innerHTML = `${windSpeed}<span class="unit">km/h</span>`;
 
+  changeTime(date);
   changeProgressBar(humidity, feelsLike, windSpeed);
 }
 
@@ -77,13 +81,11 @@ function handleSubmit(e) {
   e.preventDefault();
   let city = document.querySelector("#searchInput").value;
   let cityHeader = document.querySelector("#city");
-  cityHeader.innerHTML = city;
 
-  //change time nad date
-  changeTime();
-
-  // search for city information
-  search(city);
+  if (city !== "") {
+    cityHeader.innerHTML = city;
+    search(city);
+  }
 }
 
 /* toggle button */
@@ -122,5 +124,4 @@ function unitChange(btn) {
 let searchBar = document.querySelector("#searchbar");
 searchBar.addEventListener("submit", handleSubmit);
 
-changeTime();
 search("Tehran");
