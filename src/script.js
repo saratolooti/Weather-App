@@ -65,6 +65,7 @@ function currWeather(response) {
   humidityText.innerHTML = `${humidity}%`;
   feelsLikeText.innerHTML = `${feelsLike}°`;
   windText.innerHTML = `${windSpeed}<span class="unit">km/h</span>`;
+  currentIcon.setAttribute("src", `image/animated/${iconNum}.svg`);
 
   changeTime(date);
   changeProgressBar(humidity, feelsLike, windSpeed);
