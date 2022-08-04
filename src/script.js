@@ -1,32 +1,62 @@
-/* change Time and Date */
-function changeTime(timestamp) {
-  let now = new Date(timestamp);
+let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+let months = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
 
-  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-  let months = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ];
+/* change Forecast time */
+function changeNextDate(timestamp) {
+  let nextDate = new Date(timestamp * 1000);
+  return days[nextDate.getDay()];
+}
 
-  let day = days[now.getDay()];
-  let month = months[now.getMonth()];
-  let currClock = document.querySelector("#currClock");
-  let currDate = document.querySelector("#currDate");
+/* Forecast */
+function displayForecast(response) {
+  let forecast = response.data.daily;
+  let forcastElement = document.querySelector("#forecast");
+  let forecastHtml = ``;
 
-  currClock.innerHTML = `${("0" + now.getHours()).slice(-2)}:${(
-    "0" + now.getMinutes()
-  ).slice(-2)}`;
-  currDate.innerHTML = `${day}, ${month} ${now.getDate()}`;
+  forecast.forEach(function (forecastDay, index) {
+    if (index < 5) {
+      forecastHtml =
+        forecastHtml +
+        `
+      <div class="col-lg-2 col-md-4 col-sm-5">
+        <div class="nextWeather-icon">
+          <img
+            src="image/animated/${forecastDay.weather[0].icon}.svg"
+            alt="partly-cloudy"
+            width="70px"
+          />
+        </div>
+        <div class="weather-box">
+          <span class="nextDate">${changeNextDate(forecastDay.dt)}</span>
+          <span class="nextDegree" id="nextDegree">${Math.round(
+            forecastDay.temp.max
+          )}°</span>
+        </div>
+       </div>
+    `;
+    }
+  });
+  forcastElement.innerHTML = forecastHtml;
+}
+
+/* Get Forecast */
+function getForecast(coordinates) {
+  let apiKey = "ab4448a82d0d50e0ba09f05600cb7043";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(displayForecast);
 }
 
 /*  change circular progress bar */
@@ -40,10 +70,23 @@ function changeProgressBar(h, f, w) {
   document.documentElement.style.setProperty("--dashoffset-w", w);
 }
 
+/* change Current time */
+function changeCurrDate(timestamp) {
+  let now = new Date(timestamp);
+
+  let day = days[now.getDay()];
+  let month = months[now.getMonth()];
+  let currClock = document.querySelector("#currClock");
+  let currDate = document.querySelector("#currDate");
+
+  currClock.innerHTML = `${("0" + now.getHours()).slice(-2)}:${(
+    "0" + now.getMinutes()
+  ).slice(-2)}`;
+  currDate.innerHTML = `${day}, ${month} ${now.getDate()}`;
+}
+
 /* current weather */
 function currWeather(response) {
-  console.log(response);
-
   let currtemp = Math.round(response.data.main.temp);
   let description = response.data.weather[0].description;
   let humidity = response.data.main.humidity;
@@ -67,8 +110,9 @@ function currWeather(response) {
   windText.innerHTML = `${windSpeed}<span class="unit">km/h</span>`;
   currentIcon.setAttribute("src", `image/animated/${iconNum}.svg`);
 
-  changeTime(date);
+  changeCurrDate(date);
   changeProgressBar(humidity, feelsLike, windSpeed);
+  getForecast(response.data.coord);
 }
 
 /* search part */
