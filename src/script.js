@@ -26,6 +26,7 @@ function displayForecast(response) {
   let forcastElement = document.querySelector("#forecast");
   let forecastHtml = ``;
 
+  forecast.shift();
   forecast.forEach(function (forecastDay, index) {
     if (index < 5) {
       forecastHtml =
@@ -107,7 +108,7 @@ function currWeather(response) {
   descriptionText.innerHTML = description;
   humidityText.innerHTML = `${humidity}%`;
   feelsLikeText.innerHTML = `${feelsLike}°`;
-  windText.innerHTML = `${windSpeed}<span class="unit">km/h</span>`;
+  windText.innerHTML = `${windSpeed}<span class="unit">m/h</span>`;
   currentIcon.setAttribute("src", `image/animated/${iconNum}.svg`);
 
   changeCurrDate(date);
