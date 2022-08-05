@@ -60,6 +60,34 @@ function getForecast(coordinates) {
   axios.get(apiUrl).then(displayForecast);
 }
 
+/* Message box */
+function messageBox(iconNum, temp) {
+  iconNum = iconNum.slice(0, -1);
+  let messages = {
+    00: "If the temperature is less than my age, I dont get out of bed!",
+    01: "The weather is perfect. The gods are shining on us.",
+    02: "Who cares about the clouds when we're together? Just sing a song and bring the sunny weather.",
+    03: "Oh, the lovely clouds again",
+    04: "Oh, the lovely clouds again",
+    05: "I love cold, windy weather.",
+    09: "How about sitting a little bit next to the window, relaxing with cup of tea and reading some books!",
+    10: "No matter what the weather, always bring your own sunshine.",
+    11: "If you want to see the sunshine, you have to weather the storm.",
+    13: "It is too cold out there, lets just stay and have our hot chocolate",
+    50: "There is really no such thing as bad weather, only different kinds of good weather",
+  };
+  let ImgElement = document.querySelector("#messageImg");
+  let textElement = document.querySelector("#message");
+
+  if ((temp < 15) & (temp > 8)) {
+    ImgElement.setAttribute("src", `image/${"00"}.svg`);
+    textElement.innerHTML = `“ ${messages[00]} “`;
+  } else {
+    ImgElement.setAttribute("src", `image/${iconNum}.svg`);
+    textElement.innerHTML = `“ ${messages[parseInt(iconNum)]} “`;
+  }
+}
+
 /*  change circular progress bar */
 function changeProgressBar(h, f, w) {
   h = Math.round(220 - 220 * (h / 100));
@@ -113,6 +141,7 @@ function currWeather(response) {
 
   changeCurrDate(date);
   changeProgressBar(humidity, feelsLike, windSpeed);
+  messageBox(iconNum, currtemp);
   getForecast(response.data.coord);
 }
 

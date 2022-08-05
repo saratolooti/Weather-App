@@ -362,9 +362,9 @@ svg {
 }
 
 .message {
-  margin: 80px 0 10px;
+  margin: 60px 0 10px;
   color: var(--subject-c);
-  font-size: 20px;
+  font-size: 19px;
   text-align: center;
 }
 
